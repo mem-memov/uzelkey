@@ -1,3 +1,6 @@
+module Types where
+
+
 data Entry = Entry PositivePointer NegativePointer
 
 newtype PositivePointer = PositivePointer Pointer
@@ -9,4 +12,4 @@ newtype NodeLink = NodeLink Link
 newtype BackwardLink = BackwardLink Link
 newtype ForwardLink = ForwardLink Link
 
-newtype Link = Link Words
+newtype Link = Link String
