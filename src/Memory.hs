@@ -14,14 +14,14 @@ import Data.Maybe (catMaybes, isJust, fromJust)
 
 type ByteStorage s = ST s (STUArray s Word Word8)
 
-create :: Word -> ST s (STUArray s Word Word)
+create :: Word -> ByteStorage s
 create lastIndex = do
     stuArray <- newArray (minBound :: Word, lastIndex) 0
     return stuArray
 
-read :: ST s (STUArray s Word Word) -> Word -> ST s (STUArray s Word Word)
+read :: ByteStorage s -> Word -> ByteStorage s
 read byteStorage i = byteStorage >>= \stuArray -> do 
-    let val = (unsafeRead stuArray 1) :: (ST s Word)
+    val <- readArray stuArray i
     return stuArray
 
 -- read :: ByteStorage -> Word -> Word -> Word -> Maybe [Word]
