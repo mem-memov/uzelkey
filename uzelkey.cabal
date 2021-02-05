@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c480c4af0f01de5f1279d921b4b071f4b0d939d1f9286fe8508b58d4fc2c30c2
+-- hash: 882332126a499697d7878a8699a5cced97d3eb9812f57648e07bd72a43ee2f64
 
 name:           uzelkey
 version:        0.1.0.0
@@ -38,6 +38,7 @@ library
   build-depends:
       array
     , base >=4.7 && <5
+    , split
   default-language: Haskell2010
 
 executable uzelkey-exe
@@ -50,6 +51,7 @@ executable uzelkey-exe
   build-depends:
       array
     , base >=4.7 && <5
+    , split
     , uzelkey
   default-language: Haskell2010
 
@@ -64,5 +66,6 @@ test-suite uzelkey-test
   build-depends:
       array
     , base >=4.7 && <5
+    , split
     , uzelkey
   default-language: Haskell2010

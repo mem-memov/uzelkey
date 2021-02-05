@@ -1,4 +1,4 @@
-module Converter where
+module Converter (word8ListToWord, wordToWord8List) where
 
 import Data.Word
 import Data.Bits
@@ -20,7 +20,7 @@ word8ListToWord word8List =
         word = sum poweredBytesInWords
 
 wordToWord8List :: Word -> Word -> Maybe [Word8]
-wordToWord8List word listLength =
+wordToWord8List listLength word =
     if listLength == 0 || listLength > maxLength
         then
             Nothing
