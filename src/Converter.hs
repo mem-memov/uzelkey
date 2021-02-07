@@ -11,7 +11,7 @@ word8ListToWord word8List =
         else
             Just $ word
     where
-        listLength = (fromIntegral (length word8List)) :: Word
+        listLength = length word8List
         lastIndex = listLength - 1
         indexes = reverse [0 .. lastIndex]
         bytesInWords = map word8ToWord word8List
@@ -19,7 +19,7 @@ word8ListToWord word8List =
         poweredBytesInWords  = map (\(index, byteInWord) -> byteInWord * 2 ^ (index * 8)) indexedBytesInWords 
         word = sum poweredBytesInWords
 
-wordToWord8List :: Word -> Word -> Maybe [Word8]
+wordToWord8List :: Int -> Word -> Maybe [Word8]
 wordToWord8List listLength word =
     if listLength == 0 || listLength > maxLength
         then
@@ -31,7 +31,7 @@ wordToWord8List listLength word =
         indexes = [0 .. lastIndex]
         (result, rest) = foldr collect ([], word) indexes
 
-collect :: Word -> ([Word8], Word) -> ([Word8], Word)
+collect :: Int -> ([Word8], Word) -> ([Word8], Word)
 collect index (word8List, rest) = 
     let 
         (byteWord, unprocessed) = getUnprocessedAndByteWord rest index 
@@ -45,8 +45,8 @@ word8ToWord word8 = (fromIntegral word8) :: Word
 wordToWord8 :: Word -> Word8
 wordToWord8 word = (fromIntegral word) :: Word8
 
-getUnprocessedAndByteWord :: Word -> Word -> (Word, Word)
+getUnprocessedAndByteWord :: Word -> Int -> (Word, Word)
 getUnprocessedAndByteWord word index = word `divMod` ((2 ^ (index * 8)) :: Word)
 
-maxLength :: Word
-maxLength = fromIntegral $ finiteBitSize (minBound :: Word) `div` finiteBitSize (minBound :: Word8)
+maxLength :: Int
+maxLength = finiteBitSize (minBound :: Word) `div` finiteBitSize (minBound :: Word8)
