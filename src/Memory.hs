@@ -1,13 +1,13 @@
-module Memory where
+module Memory (Memory.create, Memory.read, Memory.write) where
 
 import qualified Data.Vector.Unboxed as VU
 import qualified Data.Vector.Unboxed.Mutable as VUM
-import Data.Word (Word8)
-import Control.Monad.ST (runST)
-import Converter (word8ListToWord, wordToWord8List)
 import Data.List.Split (chunksOf)
 import Data.Maybe (catMaybes, isJust, fromJust)
+import Data.Word (Word8)
+import Control.Monad.ST (runST)
 import Control.Monad (forM_)
+import Converter (word8ListToWord, wordToWord8List)
 
 type MinIndex = Int
 type MaxIndex = Int
