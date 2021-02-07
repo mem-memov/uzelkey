@@ -4,7 +4,7 @@ import Memory
 
 main :: IO ()
 main = do
-    let a = Memory.create 10000000000
+    let a = Memory.create 1000000000
     let b = Memory.read a 1000 4 1
     let (Just a2) = Memory.write a 1000 4 [(1 :: Word)]
     let b2 = Memory.read a 1000 4 1
