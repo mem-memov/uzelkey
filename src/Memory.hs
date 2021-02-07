@@ -34,8 +34,8 @@ read (ByteStorage minIndex maxIndex byteVector) firstIndex chunkLength chunkNumb
     where
         word8ListLength = chunkLength * chunkNumber
         lastIndex = firstIndex + word8ListLength - 1
-
-        word8List = fmap (byteVector VU.!) [firstIndex .. lastIndex]
+        
+        word8List = (VU.toList . (VU.unsafeSlice firstIndex word8ListLength)) byteVector
         wordList = (catMaybes . (map word8ListToWord) . (chunksOf chunkLength)) word8List
 
 write :: ByteStorage -> Int -> Int -> [Word] -> Maybe ByteStorage
