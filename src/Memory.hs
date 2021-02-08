@@ -13,6 +13,9 @@ type MinIndex = Int
 type MaxIndex = Int
 type ByteVector = VU.Vector Word8
 data ByteStorage = ByteStorage MinIndex MaxIndex ByteVector
+type ChunkLength = Int
+type ChunkNumber = Int
+data ChunkStorage = ChunkStorage ChunkLength ChunkNumber ByteStorage
 
 instance Show ByteStorage where
     show (ByteStorage minIndex maxIndex byteVector) = "ByteStorage from " ++ show minIndex ++ " to " ++ show maxIndex 
