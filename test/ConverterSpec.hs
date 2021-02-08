@@ -41,5 +41,8 @@ spec = do
     it "converts [1,0,0,0,0,0,0] to the power 48 of 2" $ do
       word8ListToWord [1,0,0,0,0,0,0] `shouldBe` Just (2 ^ 48)
 
-    it "converts [1,0,0,0,0,0,0,0] to the power 64 of 2" $ do
-      word8ListToWord [1,0,0,0,0,0,0,0] `shouldBe` Just (2 ^ 64)
+    it "converts [1,0,0,0,0,0,0,0] to the power 48 of 2" $ do
+      word8ListToWord [1,0,0,0,0,0,0,0] `shouldBe` Just (2 ^ 56)
+
+    it "converts [255,0,0,0,0,0,0,0] to the power 64 of 2" $ do
+      word8ListToWord [255,255,255,255,255,255,255,255] `shouldBe` Just (2 ^ 64 - 1)
