@@ -1,4 +1,8 @@
-module Memory (Memory.create, Memory.read, Memory.write) where
+module Memory 
+    ( Memory.createStorage
+    , Memory.readStorage
+    , Memory.writeStorage
+    ) where
 
 import qualified Data.Vector.Unboxed as VU
 import qualified Data.Vector.Unboxed.Mutable as VUM
@@ -7,53 +11,50 @@ import Data.Maybe (catMaybes, isJust, fromJust)
 import Data.Word (Word8)
 import Control.Monad.ST (runST)
 import Control.Monad (forM_)
-import Converter (word8ListToWord, wordToWord8List)
+import qualified Converter (word8ListToWord, wordToWord8List)
 
-type MinIndex = Int
-type MaxIndex = Int
+type BytesInChunk = Int
+type ChunksInStorage = Int
 type ByteVector = VU.Vector Word8
-data ByteStorage = ByteStorage MinIndex MaxIndex ByteVector
-type ChunkLength = Int
-type ChunkNumber = Int
-data ChunkStorage = ChunkStorage ChunkLength ChunkNumber ByteStorage
+data ChunkStorage = ChunkStorage BytesInChunk ChunksInStorage ByteVector
 
-instance Show ByteStorage where
-    show (ByteStorage minIndex maxIndex byteVector) = "ByteStorage from " ++ show minIndex ++ " to " ++ show maxIndex 
+instance Show ChunkStorage where
+    show (ChunkStorage bytesInChunk chunksInStorage _) = "ChunkStorage with " ++ show chunksInStorage ++ " chunks of " ++ show bytesInChunk ++ " bytes each" 
 
-create :: Int -> ByteStorage
-create maxIndex = ByteStorage 0 maxIndex $ runST $ do
-    let length = maxIndex + 1
-    let defaultValue = (0 :: Word8)
-    vector <- VUM.replicate length defaultValue
-    VU.unsafeFreeze vector
+createStorage :: BytesInChunk -> ChunksInStorage -> Maybe ChunkStorage
+createStorage bytesInChunk chunksInStorage = 
+    if bytesInChunk < 1 || chunksInStorage < 1
+        then 
+            Nothing
+        else 
+            Just $ ChunkStorage bytesInChunk chunksInStorage $ runST $ do
+                vector <- VUM.replicate (bytesInChunk * chunksInStorage) (0 :: Word8)
+                VU.unsafeFreeze vector
 
-read :: ByteStorage -> Int -> Int -> Int -> Maybe [Word]
-read (ByteStorage minIndex maxIndex byteVector) firstIndex chunkLength chunkNumber = 
-    if firstIndex < minIndex || lastIndex > maxIndex || word8ListLength <= 0
+readStorage :: ChunkStorage -> Int -> Int -> Maybe [Word]
+readStorage (ChunkStorage bytesInChunk chunksInStorage byteVector) index length = 
+    if index < 0 || index > (chunksInStorage - 1) || length < 1 || length > (bytesInChunk * chunksInStorage)
         then 
             Nothing
         else
             Just wordList
     where
-        word8ListLength = chunkLength * chunkNumber
-        lastIndex = firstIndex + word8ListLength - 1
-        
-        word8List = (VU.toList . (VU.unsafeSlice firstIndex word8ListLength)) byteVector
-        wordList = (catMaybes . (map word8ListToWord) . (chunksOf chunkLength)) word8List
+        word8List = (VU.toList . (VU.unsafeSlice (index * bytesInChunk) (length * bytesInChunk))) byteVector
+        wordList = (catMaybes . (map Converter.word8ListToWord) . (chunksOf bytesInChunk)) word8List
 
-write :: ByteStorage -> Int -> Int -> [Word] -> Maybe ByteStorage
-write (ByteStorage minIndex maxIndex byteVector) firstIndex chunkLength wordList = 
-    if isOutOfBounds && chunksOk
+writeStorage :: ChunkStorage -> Int -> [Word] -> Maybe ChunkStorage
+writeStorage (ChunkStorage bytesInChunk chunksInStorage byteVector) index wordList =
+    if index < 0 || index > (chunksInStorage - 1) || length wordList < 1 || not chunksOk
         then 
             Nothing
         else
-            Just (ByteStorage minIndex maxIndex updatedVector)
+            Just $ (ChunkStorage bytesInChunk chunksInStorage updatedVector)
     where
         wordListLength = length wordList
-        word8ListLength = chunkLength * wordListLength
+        word8ListLength = bytesInChunk * wordListLength
+        firstIndex = index * bytesInChunk
         lastIndex = firstIndex + word8ListLength
-        isOutOfBounds = firstIndex < minIndex || lastIndex > maxIndex
-        word8ListChunks = map (wordToWord8List chunkLength) wordList
+        word8ListChunks = map (Converter.wordToWord8List bytesInChunk) wordList
         chunksOk = all isJust word8ListChunks
         chunks = map fromJust word8ListChunks
         updatedVector = runST $ do
@@ -67,3 +68,4 @@ write (ByteStorage minIndex maxIndex byteVector) firstIndex chunkLength wordList
                     let word8 = word8List !! j
                     VUM.unsafeWrite vector index word8
             VU.unsafeFreeze vector
+

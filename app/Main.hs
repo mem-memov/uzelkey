@@ -1,15 +1,14 @@
 module Main where
 
 import Memory
+import Data.Maybe (fromJust)
 
 main :: IO ()
 main = do
-    let a = Memory.create 1000000000
-    let b = Memory.read a 1000 4 1
-    let (Just a2) = Memory.write a 1000 4 [(1 :: Word)]
-    let b2 = Memory.read a 1000 4 1
-    let b3 = Memory.read a2 2000 4 1
-    let b4 = Memory.read a 1000 4 1
-    putStrLn ("Done! " ++ show b ++ " " ++ show b2 ++ " " ++ show b3 ++ " " ++ show b4)
+    let a = fromJust $ Memory.createStorage 4 100000000
+    let b = fromJust $ Memory.readStorage a 1 2
+    let a2 = fromJust $ Memory.writeStorage a 1 [10,20]
+    let b2 = fromJust $ Memory.readStorage a2 1 2
+    putStrLn ("Done! " ++ show b ++ " " ++ show b2)
     a <- getLine
     if a == "exit" then return () else main 
