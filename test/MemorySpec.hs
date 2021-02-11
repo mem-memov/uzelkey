@@ -63,7 +63,7 @@ spec = do
 
     it "reads first 6 machine word with default values" $ do
       let storage = fromJust $ Memory.create 4 100
-      let firstWord = fromJust $ Memory.read storage 1 6
+      let firstWord = fromJust $ Memory.read storage 0 6
       firstWord `shouldBe` ([0,0,0,0,0,0] :: [Word])
 
   describe "Memory.write" $ do
