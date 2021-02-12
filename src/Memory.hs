@@ -51,22 +51,17 @@ write (ChunkStorage bytesInChunk chunksInStorage byteVector) index wordList =
         else
             Just $ (ChunkStorage bytesInChunk chunksInStorage updatedVector)
     where
-        wordListLength = length wordList
-        word8ListLength = bytesInChunk * wordListLength
         firstIndex = index * bytesInChunk
-        lastIndex = firstIndex + word8ListLength
         word8ListChunks = map (Converter.wordToWord8List bytesInChunk) wordList
         chunksOk = all isJust word8ListChunks
         chunks = map fromJust word8ListChunks
+        word8List = concat chunks
         updatedVector = runST $ do
             vector <- VU.unsafeThaw byteVector
-            let end = (length chunks) -1
+            let end = (length word8List) - 1
             forM_ [0 .. end] $ \i -> do
-                let word8List = chunks !! i
-                let end = (length word8List) -1
-                forM_ [0 .. end] $ \j -> do
-                    let index = firstIndex + i * j
-                    let word8 = word8List !! j
-                    VUM.unsafeWrite vector index word8
+                let index = firstIndex + i
+                let word8 = word8List !! i
+                VUM.unsafeWrite vector index word8
             VU.unsafeFreeze vector
 
