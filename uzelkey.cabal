@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 0f6c3171e343a2426c0217e0169e80ce98ec5d1fcda9053a2ecc7b9182325597
+-- hash: d5ce864d525b00893e88449ace6eb949a3d8d9f0ce4ca6355ffe92432d33607e
 
 name:           uzelkey
 version:        0.1.0.0
@@ -30,6 +30,7 @@ library
       Converter
       Lib
       Memory
+      Serializer
       Types
   other-modules:
       Paths_uzelkey
@@ -61,6 +62,7 @@ test-suite uzelkey-test
   other-modules:
       ConverterSpec
       MemorySpec
+      SerializerSpec
       Paths_uzelkey
   hs-source-dirs:
       test

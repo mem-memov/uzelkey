@@ -1,7 +1,7 @@
 module MemorySpec where
 
 import Test.Hspec
-import Memory
+import qualified Memory
 import Data.Maybe
 
 spec :: Spec

@@ -1,15 +1,15 @@
 module Types where
 
+data Entry = Entry PositivePointer NegativePointer deriving (Show, Eq)
 
-data Entry = Entry PositivePointer NegativePointer
+newtype PositivePointer = PositivePointer Pointer deriving (Show, Eq)
+newtype NegativePointer = NegativePointer Pointer deriving (Show, Eq)
 
-newtype PositivePointer = PositivePointer Pointer
-newtype NegativePointer = NegativePointer Pointer
+data Pointer = Pointer NodeLink BackwardLink ForwardLink deriving (Show, Eq)
 
-data Pointer = Pointer NodeLink BackwardLink ForwardLink
+newtype NodeLink = NodeLink Link deriving (Show, Eq)
+newtype BackwardLink = BackwardLink Link deriving (Show, Eq)
+newtype ForwardLink = ForwardLink Link deriving (Show, Eq)
 
-newtype NodeLink = NodeLink Link
-newtype BackwardLink = BackwardLink Link
-newtype ForwardLink = ForwardLink Link
+newtype Link = Link Word deriving (Show, Eq)
 
-newtype Link = Link String
