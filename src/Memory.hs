@@ -1,5 +1,6 @@
 module Memory 
-    ( Memory.create
+    ( Memory.ChunkStorage
+    , Memory.create
     , Memory.read
     , Memory.write
     ) where
@@ -20,7 +21,6 @@ data ChunkStorage = ChunkStorage BytesInChunk ChunksInStorage ByteVector derivin
 
 instance Show ChunkStorage where
     show (ChunkStorage bytesInChunk chunksInStorage _) = "ChunkStorage with " ++ show chunksInStorage ++ " chunks of " ++ show bytesInChunk ++ " bytes each" 
-
 
 create :: BytesInChunk -> ChunksInStorage -> Maybe ChunkStorage
 create bytesInChunk chunksInStorage = 
