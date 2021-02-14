@@ -4,7 +4,7 @@ import qualified Memory
 import Data.Maybe (fromJust)
 import qualified EntryStorage
 import qualified Serializer
-import Control.Monad.State (runState, execState, evalState, put)
+import Control.Monad.State (evalState)
 
 main :: IO ()
 main = do
@@ -13,8 +13,8 @@ main = do
                     entry <- (flip evalState) byteStorage $ do 
                                                                 EntryStorage.writeEntry 0 (Serializer.deserialize [1,1,1,1,1,1])
                                                                 entry <- EntryStorage.readEntry 0
-                                                                return $ entry
-                    return entry
+                                                                return $ entry -- from State
+                    return entry -- from Maybe
     print entry
     a <- getLine
     if a == "exit" then return () else main 
