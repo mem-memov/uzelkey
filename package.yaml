@@ -24,6 +24,7 @@ dependencies:
 - vector
 - split
 - mtl
+- transformers
 
 library:
   source-dirs: src
