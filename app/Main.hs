@@ -11,7 +11,7 @@ import Control.Monad.Trans.Reader (runReaderT)
 import Control.Monad.Trans.State (runStateT)
 import Control.Monad.Trans.Except (runExceptT)
 
-writeReadFirstEntry :: MonadStack.ReaderStateExceptIOStack Int
+writeReadFirstEntry :: MonadStack.ReaderStateIOStack Int
 writeReadFirstEntry = do
     return 1
 
@@ -20,8 +20,7 @@ main = do
     let configuration = MonadStack.Configuration { MonadStack.aParam = 5 }
     let runReaderMonad = runReaderT writeReadFirstEntry configuration
     let runStateMonad = runStateT runReaderMonad (fromJust (Memory.create 4 100000000))
-    let runExceptMonad = runExceptT runStateMonad
-    e <- runExceptMonad
+    e <- runStateMonad
     print e
 
 
