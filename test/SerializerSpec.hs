@@ -13,6 +13,7 @@ import qualified ForwardLink
 
 spec :: Spec
 spec = do
+
   describe "Serializer.Entry" $ do
 
     it "serializes an entry to an array of machine words" $ do

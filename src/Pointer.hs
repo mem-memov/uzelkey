@@ -11,7 +11,7 @@ data Type =
         NodeLink.Type 
         BackwardLink.Type 
         ForwardLink.Type 
-        deriving (Show, Eq)
+        deriving (Eq)
 
 instance Serializer.Interface Pointer.Type where
     serialize 
@@ -26,3 +26,7 @@ instance Serializer.Interface Pointer.Type where
                 (Serializer.deserialize [words !! 0])
                 (Serializer.deserialize [words !! 1])
                 (Serializer.deserialize [words !! 2])
+
+instance Show Pointer.Type where
+    show (Pointer.Type nodeLink backwardLink forwardLink) = 
+        "(Pointer " ++ show nodeLink ++ " " ++ show backwardLink ++ " " ++ show forwardLink ++ ")"

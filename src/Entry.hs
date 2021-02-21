@@ -10,7 +10,7 @@ data Type =
     Type 
         PositivePointer.Type 
         NegativePointer.Type 
-        deriving (Show, Eq)
+        deriving (Eq)
 
 instance Serializer.Interface Entry.Type where
     serialize
@@ -23,3 +23,7 @@ instance Serializer.Interface Entry.Type where
         = Entry.Type
             (Serializer.deserialize (take 3 words))
             (Serializer.deserialize (drop 3 words))
+
+instance Show Entry.Type where
+    show (Entry.Type positivePointer negativePointer) = 
+        "(Entry " ++ show positivePointer ++ " " ++ show negativePointer ++ ")"
