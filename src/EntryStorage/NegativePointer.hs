@@ -2,6 +2,7 @@ module EntryStorage.NegativePointer (Type) where
 
 import qualified EntryStorage.Pointer as Pointer
 import qualified EntryStorage.Serializer as Serializer
+import qualified EntryStorage.Eraser as Eraser
 
 newtype Type = Type Pointer.Type deriving (Eq)
 
@@ -11,3 +12,7 @@ instance Serializer.Interface Type where
 
 instance Show Type where
     show (Type pointer) = "(NegativePointer " ++ show pointer ++ ")"
+
+instance Eraser.Interface Type where
+    erase (Type pointer) = Type $ Eraser.erase pointer
+    isBlank (Type pointer) = Eraser.isBlank pointer

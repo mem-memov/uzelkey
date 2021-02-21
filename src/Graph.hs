@@ -1,6 +1,6 @@
 module Graph
-( Graph.addNode
-, Graph.getNode
+( addNode
+, getNode
 ) where
 
 import qualified EntryStorage
@@ -9,7 +9,9 @@ import qualified Memory
 import Control.Monad.State (State, get)
 
 addNode :: State Memory.ChunkStorage (Maybe Node.Type)
-addNode = undefined
+addNode = do
+    maybeFirstNode <- requireFirstNode
+    return Nothing
 
 getNode :: Int -> State Memory.ChunkStorage (Maybe Node.Type)
 getNode identifier = do
@@ -19,4 +21,5 @@ getNode identifier = do
 requireFirstNode :: State Memory.ChunkStorage (Maybe Node.Type)
 requireFirstNode = do
     maybeFirstEntry <- EntryStorage.readEntry 0
+    
     return $ fmap Node.construct maybeFirstEntry

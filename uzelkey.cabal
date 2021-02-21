@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: b3f1783c29636ea50f57a712f307fd8c3a610f850eede2b3ee34e0506b67dde7
+-- hash: 7922d72cc6d8e1adac655ae08dbd1f9fef29c87199af8b93435f120316025a8c
 
 name:           uzelkey
 version:        0.1.0.0
@@ -31,6 +31,7 @@ library
       EntryStorage
       EntryStorage.BackwardLink
       EntryStorage.Entry
+      EntryStorage.Eraser
       EntryStorage.ForwardLink
       EntryStorage.Link
       EntryStorage.NegativePointer
@@ -39,7 +40,6 @@ library
       EntryStorage.PositivePointer
       EntryStorage.Serializer
       Graph
-      Lib
       Memory
       Node
   other-modules:

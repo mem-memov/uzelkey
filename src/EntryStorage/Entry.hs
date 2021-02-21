@@ -3,6 +3,7 @@ module EntryStorage.Entry
 
 import qualified EntryStorage.Pointer as Pointer
 import qualified EntryStorage.Serializer as Serializer
+import qualified EntryStorage.Eraser as Eraser
 import qualified EntryStorage.PositivePointer as PositivePointer
 import qualified EntryStorage.NegativePointer as NegativePointer
 

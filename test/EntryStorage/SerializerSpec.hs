@@ -1,15 +1,15 @@
 module EntryStorage.SerializerSpec where
 
 import Test.Hspec
-import qualified EntryStorage.Serializer
-import qualified EntryStorage.Entry
-import qualified EntryStorage.Pointer
-import qualified EntryStorage.PositivePointer
-import qualified EntryStorage.NegativePointer
-import qualified EntryStorage.Link
-import qualified EntryStorage.NodeLink
-import qualified EntryStorage.BackwardLink
-import qualified EntryStorage.ForwardLink
+import qualified EntryStorage.Serializer as Serializer
+import qualified EntryStorage.Entry as Entry
+import qualified EntryStorage.Pointer as Pointe
+import qualified EntryStorage.PositivePointer as PositivePointer
+import qualified EntryStorage.NegativePointer as NegativePointer
+import qualified EntryStorage.Link as Link 
+import qualified EntryStorage.NodeLink as NodeLink
+import qualified EntryStorage.BackwardLink as BackwardLink
+import qualified EntryStorage.ForwardLink as ForwardLink
 
 spec :: Spec
 spec = do

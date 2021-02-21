@@ -2,6 +2,7 @@ module EntryStorage.Pointer (Type) where
 
 import qualified EntryStorage.Link as Link
 import qualified EntryStorage.Serializer as Serializer
+import qualified EntryStorage.Eraser as Eraser
 import qualified EntryStorage.NodeLink as NodeLink
 import qualified EntryStorage.BackwardLink as BackwardLink
 import qualified EntryStorage.ForwardLink as ForwardLink
@@ -30,3 +31,14 @@ instance Serializer.Interface Type where
 instance Show Type where
     show (Type nodeLink backwardLink forwardLink) = 
         "(Pointer " ++ show nodeLink ++ " " ++ show backwardLink ++ " " ++ show forwardLink ++ ")"
+
+instance Eraser.Interface Type where
+    erase (Type nodeLink backwardLink forwardLink) =
+        Type 
+            (Eraser.erase nodeLink)
+            (Eraser.erase backwardLink)
+            (Eraser.erase forwardLink)
+    isBlank (Type nodeLink backwardLink forwardLink) =
+        Eraser.isBlank nodeLink 
+        && Eraser.isBlank backwardLink 
+        && Eraser.isBlank forwardLink
