@@ -1,6 +1,5 @@
 module Main where
 
-import qualified Types
 import qualified Memory
 import Data.Maybe (fromJust)
 import qualified EntryStorage

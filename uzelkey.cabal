@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e798fc44bc8bc5bd502beef241fb45df2eb879d33e21be2c5e5f8f5456d9e8ba
+-- hash: 424eed5d64c3abc24a197a47ac26d0f11244835f96209ad8f961f4e97e2dafef
 
 name:           uzelkey
 version:        0.1.0.0
@@ -27,15 +27,20 @@ source-repository head
 
 library
   exposed-modules:
+      BackwardLink
       Converter
       Entry
       EntryStorage
+      ForwardLink
       Graph
       Lib
       Link
       Memory
+      NegativePointer
       Node
+      NodeLink
       Pointer
+      PositivePointer
       Serializer
       Types
   other-modules:

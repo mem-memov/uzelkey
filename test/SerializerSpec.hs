@@ -2,37 +2,44 @@ module SerializerSpec where
 
 import Test.Hspec
 import qualified Serializer
-import qualified Types
+import qualified Entry
+import qualified Pointer
+import qualified PositivePointer
+import qualified NegativePointer
+import qualified Link
+import qualified NodeLink
+import qualified BackwardLink
+import qualified ForwardLink
 
 spec :: Spec
 spec = do
   describe "Serializer.Entry" $ do
 
     it "serializes an entry to an array of machine words" $ do
-      let entry = Types.Entry 
-            (Types.PositivePointer 
-                (Types.Pointer 
-                    (Types.NodeLink
-                        (Types.Link 1)
+      let entry = Entry.Type 
+            (PositivePointer.Type 
+                (Pointer.Type 
+                    (NodeLink.Type
+                        (Link.Type 1)
                     ) 
-                    (Types.BackwardLink
-                        (Types.Link 2)
+                    (BackwardLink.Type
+                        (Link.Type 2)
                     )
-                    (Types.ForwardLink
-                        (Types.Link 3)
+                    (ForwardLink.Type
+                        (Link.Type 3)
                     )
                 )
             ) 
-            (Types.NegativePointer
-                (Types.Pointer 
-                    (Types.NodeLink
-                        (Types.Link 4)
+            (NegativePointer.Type
+                (Pointer.Type 
+                    (NodeLink.Type
+                        (Link.Type 4)
                     ) 
-                    (Types.BackwardLink
-                        (Types.Link 5)
+                    (BackwardLink.Type
+                        (Link.Type 5)
                     )
-                    (Types.ForwardLink
-                        (Types.Link 6)
+                    (ForwardLink.Type
+                        (Link.Type 6)
                     )
                 )
             )
@@ -42,30 +49,30 @@ spec = do
     it "deserializes an array of machine words to an entry" $ do
       Serializer.deserialize [1,2,3,4,5,6] 
         `shouldBe` 
-        Types.Entry 
-            (Types.PositivePointer 
-                (Types.Pointer 
-                    (Types.NodeLink
-                        (Types.Link 1)
+        Entry.Type 
+            (PositivePointer.Type 
+                (Pointer.Type 
+                    (NodeLink.Type
+                        (Link.Type 1)
                     ) 
-                    (Types.BackwardLink
-                        (Types.Link 2)
+                    (BackwardLink.Type
+                        (Link.Type 2)
                     )
-                    (Types.ForwardLink
-                        (Types.Link 3)
+                    (ForwardLink.Type
+                        (Link.Type 3)
                     )
                 )
             ) 
-            (Types.NegativePointer
-                (Types.Pointer 
-                    (Types.NodeLink
-                        (Types.Link 4)
+            (NegativePointer.Type
+                (Pointer.Type 
+                    (NodeLink.Type
+                        (Link.Type 4)
                     ) 
-                    (Types.BackwardLink
-                        (Types.Link 5)
+                    (BackwardLink.Type
+                        (Link.Type 5)
                     )
-                    (Types.ForwardLink
-                        (Types.Link 6)
+                    (ForwardLink.Type
+                        (Link.Type 6)
                     )
                 )
             )
