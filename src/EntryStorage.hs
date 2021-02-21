@@ -3,18 +3,18 @@ module EntryStorage
 , EntryStorage.writeEntry ) where
 
 import qualified Memory
-import qualified Types
+import qualified Entry
 import qualified Serializer
 import Control.Monad.State (State, get, put)
 
-readEntry :: Int -> State Memory.ChunkStorage (Maybe Types.Entry)
-readEntry address = do
+readEntry :: Int -> State Memory.ChunkStorage (Maybe Entry.Type)
+readEntry address = do -- State
     storage <- get
-    return $ do
+    return $ do -- Maybe
                 words <- Memory.read storage address 6
                 return $ Serializer.deserialize words
 
-writeEntry :: Int -> Types.Entry -> State Memory.ChunkStorage ()
+writeEntry :: Int -> Entry.Type -> State Memory.ChunkStorage ()
 writeEntry address entry = do
     storage <- get
     let words = Serializer.serialize entry

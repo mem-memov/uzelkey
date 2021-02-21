@@ -4,11 +4,11 @@ module Node
 , Node.connect
 ) where
 
-import qualified Types
+import qualified Entry
 
-data Type = Type Types.Entry 
+data Type = Type Entry.Type
 
-construct :: Types.Entry -> Node.Type
+construct :: Entry.Type -> Node.Type
 construct entry = Node.Type entry
 
 connect :: Node.Type -> Node.Type -> ()
