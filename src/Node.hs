@@ -4,7 +4,7 @@ module Node
 , Node.connect
 ) where
 
-import qualified Entry
+import qualified EntryStorage.Entry as Entry
 
 data Type = Type Entry.Type
 

@@ -1,10 +1,10 @@
-module Pointer (Pointer.Type) where
+module EntryStorage.Pointer (Type) where
 
-import qualified Link
-import qualified Serializer
-import qualified NodeLink
-import qualified BackwardLink
-import qualified ForwardLink
+import qualified EntryStorage.Link as Link
+import qualified EntryStorage.Serializer as Serializer
+import qualified EntryStorage.NodeLink as NodeLink
+import qualified EntryStorage.BackwardLink as BackwardLink
+import qualified EntryStorage.ForwardLink as ForwardLink
 
 data Type = 
     Type 
@@ -13,20 +13,20 @@ data Type =
         ForwardLink.Type 
         deriving (Eq)
 
-instance Serializer.Interface Pointer.Type where
+instance Serializer.Interface Type where
     serialize 
-        (Pointer.Type nodeLink backwardLink forwardLink)
+        (Type nodeLink backwardLink forwardLink)
         = Serializer.serialize nodeLink ++ Serializer.serialize backwardLink ++ Serializer.serialize forwardLink
     deserialize 
         words 
             | length words /= 3 
             = error "Wrong number of words in pointer deserializing."
             | otherwise 
-            = Pointer.Type 
+            = Type 
                 (Serializer.deserialize [words !! 0])
                 (Serializer.deserialize [words !! 1])
                 (Serializer.deserialize [words !! 2])
 
-instance Show Pointer.Type where
-    show (Pointer.Type nodeLink backwardLink forwardLink) = 
+instance Show Type where
+    show (Type nodeLink backwardLink forwardLink) = 
         "(Pointer " ++ show nodeLink ++ " " ++ show backwardLink ++ " " ++ show forwardLink ++ ")"

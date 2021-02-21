@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 478d4a06836a9029a76b569d465767c7b3200379ca7783a611652231f0f9155d
+-- hash: b3f1783c29636ea50f57a712f307fd8c3a610f850eede2b3ee34e0506b67dde7
 
 name:           uzelkey
 version:        0.1.0.0
@@ -12,7 +12,7 @@ description:    Please see the README on GitHub at <https://github.com/mem-memov
 homepage:       https://github.com/mem-memov/uzelkey#readme
 bug-reports:    https://github.com/mem-memov/uzelkey/issues
 author:         Aleksandr Novikov
-maintainer:     example@example.com
+maintainer:     mem-memov@yandex.ru
 copyright:      2021 Aleksandr Novikov
 license:        BSD3
 license-file:   LICENSE
@@ -27,21 +27,21 @@ source-repository head
 
 library
   exposed-modules:
-      BackwardLink
       Converter
-      Entry
       EntryStorage
-      ForwardLink
+      EntryStorage.BackwardLink
+      EntryStorage.Entry
+      EntryStorage.ForwardLink
+      EntryStorage.Link
+      EntryStorage.NegativePointer
+      EntryStorage.NodeLink
+      EntryStorage.Pointer
+      EntryStorage.PositivePointer
+      EntryStorage.Serializer
       Graph
       Lib
-      Link
       Memory
-      NegativePointer
       Node
-      NodeLink
-      Pointer
-      PositivePointer
-      Serializer
   other-modules:
       Paths_uzelkey
   hs-source-dirs:
@@ -73,8 +73,8 @@ test-suite uzelkey-test
   main-is: Spec.hs
   other-modules:
       ConverterSpec
+      EntryStorage.SerializerSpec
       MemorySpec
-      SerializerSpec
       Paths_uzelkey
   hs-source-dirs:
       test

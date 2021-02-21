@@ -3,7 +3,7 @@ version:             0.1.0.0
 github:              "mem-memov/uzelkey"
 license:             BSD3
 author:              "Aleksandr Novikov"
-maintainer:          "example@example.com"
+maintainer:          "mem-memov@yandex.ru"
 copyright:           "2021 Aleksandr Novikov"
 
 extra-source-files:

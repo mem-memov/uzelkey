@@ -3,7 +3,7 @@ module Main where
 import qualified Memory
 import Data.Maybe (fromJust)
 import qualified EntryStorage
-import qualified Serializer
+import qualified EntryStorage.Serializer  as Serializer
 import Control.Monad.State (evalState)
 
 main :: IO ()

@@ -4,7 +4,6 @@ module Graph
 ) where
 
 import qualified EntryStorage
-import qualified Serializer
 import qualified Node
 import qualified Memory
 import Control.Monad.State (State, get)

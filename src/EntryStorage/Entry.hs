@@ -1,10 +1,10 @@
-module Entry 
-( Entry.Type ) where
+module EntryStorage.Entry 
+( Type ) where
 
-import qualified Pointer
-import qualified Serializer
-import qualified PositivePointer
-import qualified NegativePointer
+import qualified EntryStorage.Pointer as Pointer
+import qualified EntryStorage.Serializer as Serializer
+import qualified EntryStorage.PositivePointer as PositivePointer
+import qualified EntryStorage.NegativePointer as NegativePointer
 
 data Type = 
     Type 
@@ -12,18 +12,18 @@ data Type =
         NegativePointer.Type 
         deriving (Eq)
 
-instance Serializer.Interface Entry.Type where
+instance Serializer.Interface Type where
     serialize
-        (Entry.Type positivePointer negativePointer)
+        (Type positivePointer negativePointer)
         = Serializer.serialize positivePointer ++ Serializer.serialize negativePointer
     deserialize words 
         | length words /= 6 
         = error "Wrong number of words in entry deserializing."
         | otherwise 
-        = Entry.Type
+        = Type
             (Serializer.deserialize (take 3 words))
             (Serializer.deserialize (drop 3 words))
 
-instance Show Entry.Type where
-    show (Entry.Type positivePointer negativePointer) = 
+instance Show Type where
+    show (Type positivePointer negativePointer) = 
         "(Entry " ++ show positivePointer ++ " " ++ show negativePointer ++ ")"

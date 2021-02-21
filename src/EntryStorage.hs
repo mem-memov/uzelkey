@@ -3,8 +3,8 @@ module EntryStorage
 , EntryStorage.writeEntry ) where
 
 import qualified Memory
-import qualified Entry
-import qualified Serializer
+import qualified EntryStorage.Entry as Entry
+import qualified EntryStorage.Serializer as Serializer
 import Control.Monad.State (State, get, put)
 
 readEntry :: Int -> State Memory.ChunkStorage (Maybe Entry.Type)

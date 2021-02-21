@@ -1,7 +1,7 @@
-module Serializer 
-( Serializer.Interface
-, Serializer.serialize
-, Serializer.deserialize
+module EntryStorage.Serializer 
+( Interface
+, serialize
+, deserialize
 ) where
 
 class Interface a where
