@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 198ab2bc597ddff6d23eae03a1703a2aa08c44c65a2e287a7c19f21d2fc9772d
+-- hash: b2c6ba0f3ead71f403c24340998cfa71f8c7e21d6bcfc95c99d03e35dcdabb80
 
 name:           uzelkey
 version:        0.1.0.0
@@ -32,7 +32,6 @@ library
       Graph
       Lib
       Memory
-      MonadStack
       Node
       Serializer
       Types

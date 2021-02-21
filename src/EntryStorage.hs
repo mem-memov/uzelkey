@@ -1,11 +1,11 @@
-module EntryStorage where
+module EntryStorage
+( EntryStorage.readEntry
+, EntryStorage.writeEntry ) where
 
-import Data.IORef
 import qualified Memory
 import qualified Types
 import qualified Serializer
 import Control.Monad.State (State, get, put)
-
 
 readEntry :: Int -> State Memory.ChunkStorage (Maybe Types.Entry)
 readEntry address = do

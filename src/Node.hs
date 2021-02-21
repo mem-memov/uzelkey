@@ -1,8 +1,15 @@
-module Node () where
+module Node 
+( Node.Type
+, Node.construct
+, Node.connect
+) where
 
--- import qualified Types
+import qualified Types
 
--- data Handle = Handle Types.Entry
+data Type = Type Types.Entry 
 
--- addConnection :: Node -> Node -> (Node, Node)
--- addConnection origin target = 
+construct :: Types.Entry -> Node.Type
+construct entry = Node.Type entry
+
+connect :: Node.Type -> Node.Type -> ()
+connect origin target = undefined
