@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4e07b7c037ba1d961d1aef7ae6db3498df7c7b8b0a365ad23b8d4931f7a49ec6
+-- hash: bb72f69bdd34a9e843bb4feb41d7367ec19de98230eff3feae68acc816ce1cd8
 
 name:           uzelkey
 version:        0.1.0.0
@@ -44,8 +44,9 @@ library
       EntryStorage.Pointer
       EntryStorage.PositivePointer
       Graph
+      Graph.Edge
+      Graph.Node
       Memory
-      Node
   other-modules:
       Paths_uzelkey
   hs-source-dirs:
