@@ -2,10 +2,12 @@ module EntryStorage.Entry
 ( Type ) where
 
 import qualified EntryStorage.Pointer as Pointer
-import qualified EntryStorage.Serializer as Serializer
-import qualified EntryStorage.Eraser as Eraser
 import qualified EntryStorage.PositivePointer as PositivePointer
 import qualified EntryStorage.NegativePointer as NegativePointer
+import qualified EntryStorage.Serializer as Serializer
+import qualified EntryStorage.Eraser as Eraser
+import qualified Entrystorage.Provider as Provider
+import qualified Entrystorage.PointerEntryProvider as PointerEntryProvider
 
 data Type = 
     Type 
@@ -28,3 +30,15 @@ instance Serializer.Interface Type where
 instance Show Type where
     show (Type positivePointer negativePointer) = 
         "(Entry " ++ show positivePointer ++ " " ++ show negativePointer ++ ")"
+
+instance Eraser.Interface Type where
+    erase (Type positivePointer negativePointer) = Type (Eraser.erase positivePointer) (Eraser.erase negativePointer)
+    isBlank (Type positivePointer negativePointer) = Eraser.isBlank positivePointer && Eraser.isBlank negativePointer
+
+instance Provider.Interface Type where
+    providePositiveNodeEntry (Type positivePointer _) = PointerEntryProvider.provideNodeEntry positivePointer
+    providePositiveBackwardEntry (Type positivePointer _) = PointerEntryProvider.provideBackwardEntry positivePointer
+    providePositiveForwardEntry (Type positivePointer _) = PointerEntryProvider.provideForwardEntry positivePointer
+    provideNegativeNodeEntry (Type _ negativePointer) = PointerEntryProvider.provideNodeEntry negativePointer
+    provideNegativeBackwardEntry (Type _ negativePointer) = PointerEntryProvider.provideBackwardEntry negativePointer
+    provideNegativeForwardEntry (Type _ negativePointer) = PointerEntryProvider.provideForwardEntry negativePointer

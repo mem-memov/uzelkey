@@ -1,15 +1,22 @@
 module Node 
-( Node.Type
-, Node.construct
-, Node.connect
+( Type
+, construct
+, connect
 ) where
 
 import qualified EntryStorage.Entry as Entry
+import qualified Memory
+import Control.Monad.State (State, get)
 
 data Type = Type Entry.Type
 
-construct :: Entry.Type -> Node.Type
+construct :: Entry.Type -> Type
 construct entry = Node.Type entry
 
-connect :: Node.Type -> Node.Type -> ()
+connect :: Type -> Type -> ()
 connect origin target = undefined
+
+getLastDirectConnection :: Type -> State Memory.ChunkStorage (Maybe Type)
+getLastDirectConnection (Node entry) = 
+    do
+        Entry.getDirectBackwardEntry

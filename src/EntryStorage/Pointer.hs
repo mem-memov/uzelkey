@@ -1,11 +1,14 @@
 module EntryStorage.Pointer (Type) where
 
 import qualified EntryStorage.Link as Link
-import qualified EntryStorage.Serializer as Serializer
-import qualified EntryStorage.Eraser as Eraser
+import qualified EntryStorage.Entry as Entry
 import qualified EntryStorage.NodeLink as NodeLink
 import qualified EntryStorage.BackwardLink as BackwardLink
 import qualified EntryStorage.ForwardLink as ForwardLink
+import qualified EntryStorage.Serializer as Serializer
+import qualified EntryStorage.Eraser as Eraser
+import qualified EntryStorage.EntryProvider as EntryProvider
+import qualified EntryStorage.PointerEntryProvider as PointerEntryProvider
 
 data Type = 
     Type 
@@ -42,3 +45,8 @@ instance Eraser.Interface Type where
         Eraser.isBlank nodeLink 
         && Eraser.isBlank backwardLink 
         && Eraser.isBlank forwardLink
+
+instance PointerEntryProvider.Interface Type where
+    provideNodeEntry (Type nodeLink _ _) = EntryProvider.provideEntry nodeLink
+    provideBackwardEntry (Type _ backwardLink _) = EntryProvider.provideEntry backwardLink
+    provideForwardEntry (Type _ _ forwardLink) = EntryProvider.provideEntry forwardLink
