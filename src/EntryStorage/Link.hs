@@ -1,4 +1,5 @@
-module EntryStorage.Link (Type) where
+module EntryStorage.Link 
+( Type ) where
 
 import qualified EntryStorage.Address as Address
 import qualified EntryStorage.Serializer as Serializer
@@ -20,4 +21,4 @@ instance Eraser.Interface Type where
     isBlank (Type address) = address == 0
 
 instance EntryProvider.Interface Type where
-    provideEntry (Type address) = EntryStorage.readEntry address
+    provideEntry (Type address) = EntryStorage.readEntry (fromEnum address)

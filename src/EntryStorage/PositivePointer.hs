@@ -1,7 +1,6 @@
 module EntryStorage.PositivePointer (Type) where
 
 import qualified EntryStorage.Pointer as Pointer
-import qualified EntryStorage.Entry as Entry
 import qualified EntryStorage.Serializer as Serializer
 import qualified EntryStorage.Eraser as Eraser
 import qualified EntryStorage.PointerEntryProvider as PointerEntryProvider

@@ -3,8 +3,11 @@ module EntryStorage.EntryProvider
 , provideEntry ) where
 
 import qualified EntryStorage.Provider as Provider
+import qualified EntryStorage.Serializer as Serializer
 import qualified Memory
 import Control.Monad.State (State)
 
-class Provider.Interface a => Interface a where
-    provideEntry :: a -> State Memory.ChunkStorage (Maybe a)
+class Interface a where
+    provideEntry :: 
+        (Serializer.Interface b, Provider.Interface b) => 
+        a -> State Memory.ChunkStorage (Maybe b)

@@ -1,13 +1,12 @@
 module EntryStorage.Entry 
 ( Type ) where
 
-import qualified EntryStorage.Pointer as Pointer
 import qualified EntryStorage.PositivePointer as PositivePointer
 import qualified EntryStorage.NegativePointer as NegativePointer
 import qualified EntryStorage.Serializer as Serializer
 import qualified EntryStorage.Eraser as Eraser
-import qualified Entrystorage.Provider as Provider
-import qualified Entrystorage.PointerEntryProvider as PointerEntryProvider
+import qualified EntryStorage.Provider as Provider
+import qualified EntryStorage.PointerEntryProvider as PointerEntryProvider
 
 data Type = 
     Type 

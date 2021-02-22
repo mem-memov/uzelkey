@@ -20,4 +20,4 @@ instance Eraser.Interface Type where
     isBlank (Type link) = Eraser.isBlank link
 
 instance EntryProvider.Interface Type where
-    provideEntry (Type link) = Link.provideEntry link
+    provideEntry (Type link) = EntryProvider.provideEntry link

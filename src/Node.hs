@@ -11,12 +11,12 @@ import Control.Monad.State (State, get)
 data Type = Type Entry.Type
 
 construct :: Entry.Type -> Type
-construct entry = Node.Type entry
+construct entry = Type entry
 
 connect :: Type -> Type -> ()
 connect origin target = undefined
 
-getLastDirectConnection :: Type -> State Memory.ChunkStorage (Maybe Type)
-getLastDirectConnection (Node entry) = 
-    do
-        Entry.getDirectBackwardEntry
+-- getLastDirectConnection :: Type -> State Memory.ChunkStorage (Maybe Type)
+-- getLastDirectConnection (Type entry) = 
+--     do
+--         Entry.getDirectBackwardEntry
