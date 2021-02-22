@@ -4,7 +4,7 @@ module EntryStorage.BackwardLink
 import qualified EntryStorage.Link as Link
 import qualified EntryStorage.Interface.Serializer as Serializer
 import qualified EntryStorage.Interface.Eraser as Eraser
-import qualified EntryStorage.Interface.EntryProvider as EntryProvider
+import qualified EntryStorage.Interface.LinkEntryProvider as LinkEntryProvider
 
 newtype Type = Type Link.Type deriving (Eq)
 
@@ -19,5 +19,5 @@ instance Eraser.Interface Type where
     erase (Type link) = Type $ Eraser.erase link
     isBlank (Type link) = Eraser.isBlank link
 
-instance EntryProvider.Interface Type where
-    provideEntry (Type link) = EntryProvider.provideEntry link
+instance LinkEntryProvider.Interface Type where
+    provideEntry (Type link) = LinkEntryProvider.provideEntry link

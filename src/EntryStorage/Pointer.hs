@@ -6,7 +6,7 @@ import qualified EntryStorage.BackwardLink as BackwardLink
 import qualified EntryStorage.ForwardLink as ForwardLink
 import qualified EntryStorage.Interface.Serializer as Serializer
 import qualified EntryStorage.Interface.Eraser as Eraser
-import qualified EntryStorage.Interface.EntryProvider as EntryProvider
+import qualified EntryStorage.Interface.LinkEntryProvider as LinkEntryProvider
 import qualified EntryStorage.Interface.PointerEntryProvider as PointerEntryProvider
 
 data Type = 
@@ -46,6 +46,6 @@ instance Eraser.Interface Type where
         && Eraser.isBlank forwardLink
 
 instance PointerEntryProvider.Interface Type where
-    provideNodeEntry (Type nodeLink _ _) = EntryProvider.provideEntry nodeLink
-    provideBackwardEntry (Type _ backwardLink _) = EntryProvider.provideEntry backwardLink
-    provideForwardEntry (Type _ _ forwardLink) = EntryProvider.provideEntry forwardLink
+    provideNodeEntry (Type nodeLink _ _) = LinkEntryProvider.provideEntry nodeLink
+    provideBackwardEntry (Type _ backwardLink _) = LinkEntryProvider.provideEntry backwardLink
+    provideForwardEntry (Type _ _ forwardLink) = LinkEntryProvider.provideEntry forwardLink

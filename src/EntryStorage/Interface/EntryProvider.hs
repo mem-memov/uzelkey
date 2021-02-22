@@ -1,13 +1,19 @@
-module EntryStorage.Interface.EntryProvider
+module EntryStorage.Interface.EntryProvider 
 ( Interface
-, provideEntry ) where
+, providePositiveNodeEntry
+, providePositiveBackwardEntry
+, providePositiveForwardEntry
+, provideNegativeNodeEntry
+, provideNegativeBackwardEntry
+, provideNegativeForwardEntry ) where
 
-import qualified EntryStorage.Interface.Provider as Provider
-import qualified EntryStorage.Interface.Serializer as Serializer
 import qualified Memory
 import Control.Monad.State (State)
 
 class Interface a where
-    provideEntry :: 
-        (Serializer.Interface b, Provider.Interface b) => 
-        a -> State Memory.ChunkStorage (Maybe b)
+    providePositiveNodeEntry :: a -> State Memory.ChunkStorage (Maybe a)
+    providePositiveBackwardEntry :: a -> State Memory.ChunkStorage (Maybe a)
+    providePositiveForwardEntry :: a -> State Memory.ChunkStorage (Maybe a)
+    provideNegativeNodeEntry :: a -> State Memory.ChunkStorage (Maybe a)
+    provideNegativeBackwardEntry :: a -> State Memory.ChunkStorage (Maybe a)
+    provideNegativeForwardEntry :: a -> State Memory.ChunkStorage (Maybe a)

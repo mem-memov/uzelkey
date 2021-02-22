@@ -3,12 +3,12 @@ module EntryStorage
 , EntryStorage.writeEntry ) where
 
 import qualified Memory
-import qualified EntryStorage.Interface.Provider as Provider
+import qualified EntryStorage.Interface.EntryProvider as EntryProvider
 import qualified EntryStorage.Interface.Serializer as Serializer
 import Control.Monad.State (State, get, put)
 
 readEntry :: 
-    (Serializer.Interface a, Provider.Interface a) => 
+    (Serializer.Interface a, EntryProvider.Interface a) => 
     Int -> State Memory.ChunkStorage (Maybe a)
 readEntry address = do -- State
     storage <- get

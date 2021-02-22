@@ -5,7 +5,7 @@ module Node
 ) where
 
 import qualified EntryStorage.Entry as Entry
-import qualified EntryStorage.Interface.Provider as Provider
+import qualified EntryStorage.Interface.EntryProvider as EntryProvider
 import qualified Memory
 import Control.Monad.State (State, get)
 
@@ -20,5 +20,5 @@ connect origin target = undefined
 getLastDirectConnection :: Type -> State Memory.ChunkStorage (Maybe Type)
 getLastDirectConnection (Type entry) = 
     do
-        maybeBackwardEntry <- Provider.providePositiveBackwardEntry entry
+        maybeBackwardEntry <- EntryProvider.providePositiveBackwardEntry entry
         return Nothing

@@ -5,7 +5,7 @@ import qualified EntryStorage.PositivePointer as PositivePointer
 import qualified EntryStorage.NegativePointer as NegativePointer
 import qualified EntryStorage.Interface.Serializer as Serializer
 import qualified EntryStorage.Interface.Eraser as Eraser
-import qualified EntryStorage.Interface.Provider as Provider
+import qualified EntryStorage.Interface.EntryProvider as EntryProvider
 import qualified EntryStorage.Interface.PointerEntryProvider as PointerEntryProvider
 
 data Type = 
@@ -34,7 +34,7 @@ instance Eraser.Interface Type where
     erase (Type positivePointer negativePointer) = Type (Eraser.erase positivePointer) (Eraser.erase negativePointer)
     isBlank (Type positivePointer negativePointer) = Eraser.isBlank positivePointer && Eraser.isBlank negativePointer
 
-instance Provider.Interface Type where
+instance EntryProvider.Interface Type where
     providePositiveNodeEntry (Type positivePointer _) = PointerEntryProvider.provideNodeEntry positivePointer
     providePositiveBackwardEntry (Type positivePointer _) = PointerEntryProvider.provideBackwardEntry positivePointer
     providePositiveForwardEntry (Type positivePointer _) = PointerEntryProvider.provideForwardEntry positivePointer
