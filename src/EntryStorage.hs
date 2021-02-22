@@ -3,8 +3,8 @@ module EntryStorage
 , EntryStorage.writeEntry ) where
 
 import qualified Memory
-import qualified EntryStorage.Provider as Provider
-import qualified EntryStorage.Serializer as Serializer
+import qualified EntryStorage.Interface.Provider as Provider
+import qualified EntryStorage.Interface.Serializer as Serializer
 import Control.Monad.State (State, get, put)
 
 readEntry :: 

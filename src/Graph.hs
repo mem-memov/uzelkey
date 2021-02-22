@@ -4,7 +4,7 @@ module Graph
 ) where
 
 import qualified EntryStorage
-import qualified EntryStorage.Eraser as Eraser
+import qualified EntryStorage.Interface.Eraser as Eraser
 import qualified Node
 import qualified Memory
 import Control.Monad.State (State, get)

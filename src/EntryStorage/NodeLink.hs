@@ -2,9 +2,9 @@ module EntryStorage.NodeLink
 ( Type ) where
 
 import qualified EntryStorage.Link as Link
-import qualified EntryStorage.Serializer as Serializer
-import qualified EntryStorage.Eraser as Eraser
-import qualified EntryStorage.EntryProvider as EntryProvider
+import qualified EntryStorage.Interface.Serializer as Serializer
+import qualified EntryStorage.Interface.Eraser as Eraser
+import qualified EntryStorage.Interface.EntryProvider as EntryProvider
 
 newtype Type = Type Link.Type deriving (Eq)
 

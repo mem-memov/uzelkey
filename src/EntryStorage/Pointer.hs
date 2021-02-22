@@ -4,10 +4,10 @@ import qualified EntryStorage.Link as Link
 import qualified EntryStorage.NodeLink as NodeLink
 import qualified EntryStorage.BackwardLink as BackwardLink
 import qualified EntryStorage.ForwardLink as ForwardLink
-import qualified EntryStorage.Serializer as Serializer
-import qualified EntryStorage.Eraser as Eraser
-import qualified EntryStorage.EntryProvider as EntryProvider
-import qualified EntryStorage.PointerEntryProvider as PointerEntryProvider
+import qualified EntryStorage.Interface.Serializer as Serializer
+import qualified EntryStorage.Interface.Eraser as Eraser
+import qualified EntryStorage.Interface.EntryProvider as EntryProvider
+import qualified EntryStorage.Interface.PointerEntryProvider as PointerEntryProvider
 
 data Type = 
     Type 

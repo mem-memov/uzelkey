@@ -1,4 +1,4 @@
-module EntryStorage.Serializer 
+module EntryStorage.Interface.Serializer 
 ( Interface
 , serialize
 , deserialize

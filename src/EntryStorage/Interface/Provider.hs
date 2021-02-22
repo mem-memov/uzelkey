@@ -1,4 +1,4 @@
-module EntryStorage.Provider 
+module EntryStorage.Interface.Provider 
 ( Interface
 , providePositiveNodeEntry
 , providePositiveBackwardEntry

@@ -1,11 +1,11 @@
-module EntryStorage.PointerEntryProvider 
-( EntryStorage.PointerEntryProvider.Interface
-, EntryStorage.PointerEntryProvider.provideNodeEntry
-, EntryStorage.PointerEntryProvider.provideBackwardEntry
-, EntryStorage.PointerEntryProvider.provideForwardEntry ) where
+module EntryStorage.Interface.PointerEntryProvider 
+( Interface
+, provideNodeEntry
+, provideBackwardEntry
+, provideForwardEntry ) where
 
-import qualified EntryStorage.Provider as Provider
-import qualified EntryStorage.Serializer as Serializer
+import qualified EntryStorage.Interface.Provider as Provider
+import qualified EntryStorage.Interface.Serializer as Serializer
 import qualified Memory
 import Control.Monad.State (State)
 

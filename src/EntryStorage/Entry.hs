@@ -3,10 +3,10 @@ module EntryStorage.Entry
 
 import qualified EntryStorage.PositivePointer as PositivePointer
 import qualified EntryStorage.NegativePointer as NegativePointer
-import qualified EntryStorage.Serializer as Serializer
-import qualified EntryStorage.Eraser as Eraser
-import qualified EntryStorage.Provider as Provider
-import qualified EntryStorage.PointerEntryProvider as PointerEntryProvider
+import qualified EntryStorage.Interface.Serializer as Serializer
+import qualified EntryStorage.Interface.Eraser as Eraser
+import qualified EntryStorage.Interface.Provider as Provider
+import qualified EntryStorage.Interface.PointerEntryProvider as PointerEntryProvider
 
 data Type = 
     Type 

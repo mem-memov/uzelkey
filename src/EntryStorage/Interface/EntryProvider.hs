@@ -1,9 +1,9 @@
-module EntryStorage.EntryProvider
+module EntryStorage.Interface.EntryProvider
 ( Interface
 , provideEntry ) where
 
-import qualified EntryStorage.Provider as Provider
-import qualified EntryStorage.Serializer as Serializer
+import qualified EntryStorage.Interface.Provider as Provider
+import qualified EntryStorage.Interface.Serializer as Serializer
 import qualified Memory
 import Control.Monad.State (State)
 

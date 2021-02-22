@@ -4,7 +4,7 @@ import qualified Memory
 import Data.Maybe (fromJust)
 import qualified EntryStorage.Entry as Entry
 import qualified EntryStorage
-import qualified EntryStorage.Serializer  as Serializer
+import qualified EntryStorage.Interface.Serializer  as Serializer
 import Control.Monad.State (evalState)
 
 main :: IO ()
