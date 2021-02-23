@@ -7,5 +7,5 @@ import qualified Memory
 import Control.Monad.State (State)
 
 class Interface a where
-    provideBackwardEntry :: a -> State Memory.ChunkStorage (Maybe b)
-    provideForwardEntry :: a -> State Memory.ChunkStorage (Maybe b)
+    provideBackwardEntry :: a -> State Memory.ChunkStorage (Maybe a)
+    provideForwardEntry :: a -> State Memory.ChunkStorage (Maybe a)

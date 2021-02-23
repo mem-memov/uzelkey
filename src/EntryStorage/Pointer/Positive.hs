@@ -3,7 +3,7 @@ module EntryStorage.Pointer.Positive (Type) where
 import qualified EntryStorage.Pointer as Pointer
 import qualified EntryStorage.Interface.Serializer as Serializer
 import qualified EntryStorage.Interface.Eraser as Eraser
-import qualified EntryStorage.Interface.EntryProvider.Pointer as PointerEntryProvider
+import qualified EntryStorage.Interface.EntryProvider.Chain as ChainEntryProvider
 
 newtype Type = Type Pointer.Type deriving (Eq)
 
@@ -18,7 +18,6 @@ instance Eraser.Interface Type where
     erase (Type pointer) = Type $ Eraser.erase pointer
     isBlank (Type pointer) = Eraser.isBlank pointer
 
-instance PointerEntryProvider.Interface Type where
-    provideNodeEntry (Type pointer) = PointerEntryProvider.provideNodeEntry pointer
-    provideBackwardEntry (Type pointer) = PointerEntryProvider.provideBackwardEntry pointer
-    provideForwardEntry (Type pointer) = PointerEntryProvider.provideForwardEntry pointer
+instance ChainEntryProvider.Interface Type where
+    provideBackwardEntry (Type pointer) = ChainEntryProvider.provideBackwardEntry pointer
+    provideForwardEntry (Type pointer) = ChainEntryProvider.provideForwardEntry pointer
