@@ -4,7 +4,7 @@ module EntryStorage.Link
 import qualified EntryStorage.Address as Address
 import qualified EntryStorage.Interface.Serializer as Serializer
 import qualified EntryStorage.Interface.Eraser as Eraser
-import qualified EntryStorage.Interface.LinkEntryProvider as LinkEntryProvider
+import qualified EntryStorage.Interface.EntryProvider.Link as LinkEntryProvider
 import qualified EntryStorage
 
 newtype Type = Type Address.Type deriving (Eq)

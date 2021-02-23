@@ -6,7 +6,7 @@ import qualified EntryStorage.Pointer.Negative as NegativePointer
 import qualified EntryStorage.Interface.Serializer as Serializer
 import qualified EntryStorage.Interface.Eraser as Eraser
 import qualified EntryStorage.Interface.EntryProvider as EntryProvider
-import qualified EntryStorage.Interface.PointerEntryProvider as PointerEntryProvider
+import qualified EntryStorage.Interface.EntryProvider.Pointer as PointerEntryProvider
 
 data Type = 
     Type 

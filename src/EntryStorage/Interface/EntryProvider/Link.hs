@@ -1,4 +1,4 @@
-module EntryStorage.Interface.LinkEntryProvider
+module EntryStorage.Interface.EntryProvider.Link
 ( Interface
 , provideEntry ) where
 

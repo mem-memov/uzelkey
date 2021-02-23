@@ -3,7 +3,7 @@ module EntryStorage.Pointer.Negative (Type) where
 import qualified EntryStorage.Pointer as Pointer
 import qualified EntryStorage.Interface.Serializer as Serializer
 import qualified EntryStorage.Interface.Eraser as Eraser
-import qualified EntryStorage.Interface.PointerEntryProvider as PointerEntryProvider
+import qualified EntryStorage.Interface.EntryProvider.Pointer as PointerEntryProvider
 
 newtype Type = Type Pointer.Type deriving (Eq)
 

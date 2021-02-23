@@ -1,4 +1,4 @@
-module EntryStorage.Interface.PointerEntryProvider 
+module EntryStorage.Interface.EntryProvider.Pointer 
 ( Interface
 , provideNodeEntry
 , provideBackwardEntry

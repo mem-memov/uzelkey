@@ -6,8 +6,8 @@ import qualified EntryStorage.Link.Backward as BackwardLink
 import qualified EntryStorage.Link.Forward as ForwardLink
 import qualified EntryStorage.Interface.Serializer as Serializer
 import qualified EntryStorage.Interface.Eraser as Eraser
-import qualified EntryStorage.Interface.LinkEntryProvider as LinkEntryProvider
-import qualified EntryStorage.Interface.PointerEntryProvider as PointerEntryProvider
+import qualified EntryStorage.Interface.EntryProvider.Link as LinkEntryProvider
+import qualified EntryStorage.Interface.EntryProvider.Pointer as PointerEntryProvider
 
 data Type = 
     Type 
