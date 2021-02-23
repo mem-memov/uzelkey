@@ -1,50 +1,46 @@
 module EntryStorage.Counter where
 
+import qualified EntryStorage.Chain as Chain
 import qualified EntryStorage.Count as Count
 import qualified EntryStorage.Link as Link
 import qualified EntryStorage.Link.Backward as BackwardLink
 import qualified EntryStorage.Link.Forward as ForwardLink
 import qualified EntryStorage.Interface.Serializer as Serializer
 import qualified EntryStorage.Interface.Eraser as Eraser
-import qualified EntryStorage.Interface.EntryProvider.Link as LinkEntryProvider
-import qualified EntryStorage.Interface.EntryProvider.Counter as CounterEntryProvider
+import qualified EntryStorage.Interface.EntryProvider.Chain as ChainEntryProvider
 
 data Type = 
     Type 
         Count.Type 
-        BackwardLink.Type 
-        ForwardLink.Type 
+        Chain.Type 
         deriving (Eq)
 
 instance Serializer.Interface Type where
     serialize 
-        (Type count backwardLink forwardLink)
-        = [count] ++ Serializer.serialize backwardLink ++ Serializer.serialize forwardLink
+        (Type count chain)
+        = [count] ++ Serializer.serialize chain
     deserialize 
         words 
             | length words /= 3 
-            = error "Wrong number of words in pointer deserializing."
+            = error "Wrong number of words in counter deserializing."
             | otherwise 
             = Type 
                 (words !! 0)
-                (Serializer.deserialize [words !! 1])
-                (Serializer.deserialize [words !! 2])
+                (Serializer.deserialize [words !! 1, words !! 2])
 
 instance Show Type where
-    show (Type count backwardLink forwardLink) = 
-        "(Counter " ++ show count ++ " " ++ show backwardLink ++ " " ++ show forwardLink ++ ")"
+    show (Type count chain) = 
+        "(Counter " ++ show count ++ " " ++ show chain ++ ")"
 
 instance Eraser.Interface Type where
-    erase (Type _ backwardLink forwardLink) =
+    erase (Type _ chain) =
         Type 
             0
-            (Eraser.erase backwardLink)
-            (Eraser.erase forwardLink)
-    isBlank (Type count backwardLink forwardLink) =
+            (Eraser.erase chain)
+    isBlank (Type count chain) =
         (count == 0) 
-        && Eraser.isBlank backwardLink 
-        && Eraser.isBlank forwardLink
+        && Eraser.isBlank chain
 
-instance CountEntryProvider.Interface Type where
-    provideBackwardEntry (Type _ backwardLink _) = LinkEntryProvider.provideEntry backwardLink
-    provideForwardEntry (Type _ _ forwardLink) = LinkEntryProvider.provideEntry forwardLink
+instance ChainEntryProvider.Interface Type where
+    provideBackwardEntry (Type _ chain) = ChainEntryProvider.provideBackwardEntry chain
+    provideForwardEntry (Type _ chain) = ChainEntryProvider.provideForwardEntry chain
