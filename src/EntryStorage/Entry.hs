@@ -1,8 +1,8 @@
 module EntryStorage.Entry 
 ( Type ) where
 
-import qualified EntryStorage.PositivePointer as PositivePointer
-import qualified EntryStorage.NegativePointer as NegativePointer
+import qualified EntryStorage.Pointer.Positive as PositivePointer
+import qualified EntryStorage.Pointer.Negative as NegativePointer
 import qualified EntryStorage.Interface.Serializer as Serializer
 import qualified EntryStorage.Interface.Eraser as Eraser
 import qualified EntryStorage.Interface.EntryProvider as EntryProvider

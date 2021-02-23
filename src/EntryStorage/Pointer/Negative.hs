@@ -1,4 +1,4 @@
-module EntryStorage.PositivePointer (Type) where
+module EntryStorage.Pointer.Negative (Type) where
 
 import qualified EntryStorage.Pointer as Pointer
 import qualified EntryStorage.Interface.Serializer as Serializer
@@ -12,7 +12,7 @@ instance Serializer.Interface Type where
     deserialize words = Type $ Serializer.deserialize words
 
 instance Show Type where
-    show (Type pointer) = "(PositivePointer " ++ show pointer ++ ")"
+    show (Type pointer) = "(NegativePointer " ++ show pointer ++ ")"
 
 instance Eraser.Interface Type where
     erase (Type pointer) = Type $ Eraser.erase pointer

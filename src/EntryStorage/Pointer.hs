@@ -1,9 +1,9 @@
 module EntryStorage.Pointer (Type) where
 
 import qualified EntryStorage.Link as Link
-import qualified EntryStorage.NodeLink as NodeLink
-import qualified EntryStorage.BackwardLink as BackwardLink
-import qualified EntryStorage.ForwardLink as ForwardLink
+import qualified EntryStorage.Link.Node as NodeLink
+import qualified EntryStorage.Link.Backward as BackwardLink
+import qualified EntryStorage.Link.Forward as ForwardLink
 import qualified EntryStorage.Interface.Serializer as Serializer
 import qualified EntryStorage.Interface.Eraser as Eraser
 import qualified EntryStorage.Interface.LinkEntryProvider as LinkEntryProvider

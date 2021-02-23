@@ -1,4 +1,4 @@
-module EntryStorage.ForwardLink 
+module EntryStorage.Link.Forward 
 ( Type ) where
 
 import qualified EntryStorage.Link as Link

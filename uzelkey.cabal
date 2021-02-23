@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: bb72f69bdd34a9e843bb4feb41d7367ec19de98230eff3feae68acc816ce1cd8
+-- hash: 00dab9b1c3cc8ff2e8408433931f545611383c53160c3ada619d60e0aa25f82f
 
 name:           uzelkey
 version:        0.1.0.0
@@ -30,19 +30,21 @@ library
       Converter
       EntryStorage
       EntryStorage.Address
-      EntryStorage.BackwardLink
+      EntryStorage.Connector
+      EntryStorage.Counter
       EntryStorage.Entry
-      EntryStorage.ForwardLink
       EntryStorage.Interface.EntryProvider
       EntryStorage.Interface.Eraser
       EntryStorage.Interface.LinkEntryProvider
       EntryStorage.Interface.PointerEntryProvider
       EntryStorage.Interface.Serializer
       EntryStorage.Link
-      EntryStorage.NegativePointer
-      EntryStorage.NodeLink
+      EntryStorage.Link.Backward
+      EntryStorage.Link.Forward
+      EntryStorage.Link.Node
       EntryStorage.Pointer
-      EntryStorage.PositivePointer
+      EntryStorage.Pointer.Negative
+      EntryStorage.Pointer.Positive
       Graph
       Graph.Edge
       Graph.Node

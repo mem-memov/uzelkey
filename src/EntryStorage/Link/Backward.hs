@@ -1,4 +1,4 @@
-module EntryStorage.NodeLink 
+module EntryStorage.Link.Backward 
 ( Type ) where
 
 import qualified EntryStorage.Link as Link
@@ -13,7 +13,7 @@ instance Serializer.Interface Type where
     deserialize words = Type $ Serializer.deserialize words
 
 instance Show Type where
-    show (Type link) = "(NodeLink " ++ show link ++ ")"
+    show (Type link) = "(BackwardLink " ++ show link ++ ")"
 
 instance Eraser.Interface Type where
     erase (Type link) = Type $ Eraser.erase link
