@@ -1,0 +1,1 @@
+module EntryStorage.Entry.Connector where
