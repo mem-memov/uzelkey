@@ -35,6 +35,10 @@ instance Eraser.Interface Type where
     isBlank (Type positivePointer negativePointer) = Eraser.isBlank positivePointer && Eraser.isBlank negativePointer
 
 instance EntryProvider.Interface Type where
+    countPositiveEntries (Type positivePointer _) 
+        = (EntryProvider.countPositiveEntries . PointerEntryProvider.provideNodeEntry) positivePointer
+    countNegativeEntries (Type _ negativePointer) 
+        = (EntryProvider.countPositiveEntries . PointerEntryProvider.provideNodeEntry) negativePointer
     providePositiveNodeEntry (Type positivePointer _) = PointerEntryProvider.provideNodeEntry positivePointer
     providePositiveBackwardEntry (Type positivePointer _) = PointerEntryProvider.provideBackwardEntry positivePointer
     providePositiveForwardEntry (Type positivePointer _) = PointerEntryProvider.provideForwardEntry positivePointer

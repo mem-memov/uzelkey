@@ -35,7 +35,11 @@ instance Eraser.Interface Type where
     isBlank (Type positiveCounter negativeCounter) = Eraser.isBlank positiveCounter && Eraser.isBlank negativeCounter
 
 instance EntryProvider.Interface Type where
+    countPositiveEntries (Type positiveCounter _) = Counter.countEntries positiveCounter
+    countNegativeEntries (Type _ negativeCounter) = Counter.countEntries negativeCounter
+    providePositiveNodeEntry entry = entry
     providePositiveBackwardEntry (Type positiveCounter _) = CounterEntryProvider.provideBackwardEntry positiveCounter
     providePositiveForwardEntry (Type positiveCounter _) = CounterEntryProvider.provideForwardEntry positiveCounter
+    provideNegativeNodeEntry entry = entry
     provideNegativeBackwardEntry (Type _ negativeCounter) = CounterEntryProvider.provideBackwardEntry negativeCounter
     provideNegativeForwardEntry (Type _ negativeCounter) = CounterEntryProvider.provideForwardEntry negativeCounter
