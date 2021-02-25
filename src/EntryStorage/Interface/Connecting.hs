@@ -1,4 +1,11 @@
-module EntryStorage.Interface.Connecting where
+module EntryStorage.Interface.Connecting 
+( Interface 
+, getPositiveCounter
+, getPreviousPositiveConnector
+, getNextPositiveConnector
+, getNegativeCounter
+, getPreviousNegativeConnector
+, getNextNegativeConnector ) where
 
 import qualified EntryStorage.Counting as Counting
 import qualified Memory

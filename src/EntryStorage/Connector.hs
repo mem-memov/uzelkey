@@ -1,4 +1,4 @@
-module EntryStorage.Entry.Connector
+module EntryStorage.Connector
 ( Type ) where
 
 import qualified EntryStorage.Pointer.Positive as PositivePointer
