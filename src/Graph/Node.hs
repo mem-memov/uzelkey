@@ -4,14 +4,13 @@ module Graph.Node
 , connect
 ) where
 
-import qualified EntryStorage.Entry as Entry
-import qualified EntryStorage.Interface.EntryProvider as EntryProvider
+import qualified EntryStorage.Data.Counter as Counter
 import qualified Memory
 import Control.Monad.State (State, get)
 
-data Type = Type Entry.Type
+data Type = Type Counter.Type
 
-construct :: Entry.Type -> Type
+construct :: Counter.Type -> Type
 construct entry = Type entry
 
 connect :: Type -> Type -> ()

@@ -22,34 +22,34 @@ data ChunkStorage = ChunkStorage BytesInChunk ChunksInStorage ByteVector derivin
 instance Show ChunkStorage where
     show (ChunkStorage bytesInChunk chunksInStorage _) = "ChunkStorage with " ++ show chunksInStorage ++ " chunks of " ++ show bytesInChunk ++ " bytes each" 
 
-create :: BytesInChunk -> ChunksInStorage -> Maybe ChunkStorage
+create :: BytesInChunk -> ChunksInStorage -> Either String ChunkStorage
 create bytesInChunk chunksInStorage = 
     if bytesInChunk < 1 || chunksInStorage < 1
         then 
-            Nothing
+            Left "Error when creating chunk storage in memory."
         else 
-            Just $ ChunkStorage bytesInChunk chunksInStorage $ runST $ do
+            Right $ ChunkStorage bytesInChunk chunksInStorage $ runST $ do
                 vector <- VUM.replicate (bytesInChunk * chunksInStorage) (0 :: Word8)
                 VU.unsafeFreeze vector
 
-read :: ChunkStorage -> Int -> Int -> Maybe [Word]
+read :: ChunkStorage -> Int -> Int -> Either String [Word]
 read (ChunkStorage bytesInChunk chunksInStorage byteVector) index length = 
     if index < 0 || (index + length) > chunksInStorage || length < 1
         then 
-            Nothing
+            Left "Error when reading chunk storage in memory."
         else
-            Just wordList
+            Right wordList
     where
         word8List = (VU.toList . (VU.unsafeSlice (index * bytesInChunk) (length * bytesInChunk))) byteVector
         wordList = (catMaybes . (map Converter.word8ListToWord) . (chunksOf bytesInChunk)) word8List
 
-write :: ChunkStorage -> Int -> [Word] -> Maybe ChunkStorage
+write :: ChunkStorage -> Int -> [Word] -> Either String ChunkStorage
 write (ChunkStorage bytesInChunk chunksInStorage byteVector) index wordList =
     if index < 0 || index > (chunksInStorage - 1) || length wordList < 1 || not chunksOk
         then 
-            Nothing
+            Left "Error when writing into chunk storage in memory."
         else
-            Just $ (ChunkStorage bytesInChunk chunksInStorage updatedVector)
+            Right $ (ChunkStorage bytesInChunk chunksInStorage updatedVector)
     where
         firstIndex = index * bytesInChunk
         word8ListChunks = map (Converter.wordToWord8List bytesInChunk) wordList

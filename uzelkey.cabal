@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4aa572febba1c8ed5b703e46a05b858877431b7e6567e9568b40ae9c4b7c6948
+-- hash: 092570d8e80a14f511c4e0a2af221a3417dac4c324fab23fdb4a33daefe726fa
 
 name:           uzelkey
 version:        0.1.0.0
@@ -29,28 +29,27 @@ library
   exposed-modules:
       Converter
       EntryStorage
-      EntryStorage.Address
-      EntryStorage.Count
-      EntryStorage.Counter
-      EntryStorage.Counter.Negative
-      EntryStorage.Counter.Positive
-      EntryStorage.Entry
-      EntryStorage.Entry.Connector
-      EntryStorage.Entry.Counter
-      EntryStorage.Interface.ConnectorEntryProvider
-      EntryStorage.Interface.CounterEntryProvider
-      EntryStorage.Interface.EntryProvider.Counter
-      EntryStorage.Interface.EntryProvider.Link
-      EntryStorage.Interface.EntryProvider.Pointer
-      EntryStorage.Interface.Eraser
-      EntryStorage.Interface.Serializer
-      EntryStorage.Link
-      EntryStorage.Link.Backward
-      EntryStorage.Link.Forward
-      EntryStorage.Link.Node
-      EntryStorage.Pointer
-      EntryStorage.Pointer.Negative
-      EntryStorage.Pointer.Positive
+      EntryStorage.Data.Address
+      EntryStorage.Data.Connector
+      EntryStorage.Data.Connector.Chain
+      EntryStorage.Data.Connector.Link
+      EntryStorage.Data.Connector.Link.Backward
+      EntryStorage.Data.Connector.Link.Forward
+      EntryStorage.Data.Connector.Pointer
+      EntryStorage.Data.Connector.Pointer.Negative
+      EntryStorage.Data.Connector.Pointer.Positive
+      EntryStorage.Data.Count
+      EntryStorage.Data.Counter
+      EntryStorage.Data.Counter.Accumulator
+      EntryStorage.Data.Counter.Accumulator.Negative
+      EntryStorage.Data.Counter.Accumulator.Positive
+      EntryStorage.Data.Counter.Chain
+      EntryStorage.Data.Counter.Link
+      EntryStorage.Data.Counter.Link.Backward
+      EntryStorage.Data.Counter.Link.Forward
+      EntryStorage.Interface.Erasable
+      EntryStorage.Interface.Serializable
+      EntryStorage.Interface.Traversable
       Graph
       Graph.Edge
       Graph.Node
@@ -86,7 +85,6 @@ test-suite uzelkey-test
   main-is: Spec.hs
   other-modules:
       ConverterSpec
-      EntryStorage.SerializerSpec
       MemorySpec
       Paths_uzelkey
   hs-source-dirs:

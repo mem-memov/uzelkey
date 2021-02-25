@@ -1,4 +1,4 @@
-module EntryStorage.Interface.Eraser 
+module EntryStorage.Interface.Erasable
 ( Interface
 , erase
 , isBlank) where

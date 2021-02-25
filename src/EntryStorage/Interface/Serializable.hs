@@ -1,4 +1,4 @@
-module EntryStorage.Interface.Serializer 
+module EntryStorage.Interface.Serializable
 ( Interface
 , serialize
 , deserialize
@@ -6,4 +6,4 @@ module EntryStorage.Interface.Serializer
 
 class Interface a where
     serialize :: a -> [Word]
-    deserialize :: [Word] -> a
+    deserialize :: [Word] -> Either String a

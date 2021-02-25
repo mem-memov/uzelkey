@@ -1,28 +1,40 @@
 module EntryStorage
-( EntryStorage.readEntry
-, EntryStorage.writeEntry ) where
+( readCounter
+, readConnector
+, writeEntry ) where
 
 import qualified Memory
-import qualified EntryStorage.Interface.EntryProvider as EntryProvider
-import qualified EntryStorage.Interface.Serializer as Serializer
+import qualified EntryStorage.Interface.Traversable as Traversable
+import qualified EntryStorage.Interface.Serializable as Serializable
 import Control.Monad.State (State, get, put)
 
-readEntry :: 
-    (Serializer.Interface a, EntryProvider.Interface a) => 
-    Int -> State Memory.ChunkStorage (Maybe a)
-readEntry address = do -- State
+readCounter :: 
+    (Serializable.Interface a, Traversable.CountableInterface a) => 
+    Int -> State Memory.ChunkStorage (Either String a)
+readCounter address = do -- State
     storage <- get
-    return $ do -- Maybe
+    return $ do -- Either
                 words <- Memory.read storage address 6
-                return $ Serializer.deserialize words
+                entry <- Serializable.deserialize words
+                return entry
+
+readConnector :: 
+    (Serializable.Interface a, Traversable.ConnectableInterface a) => 
+    Int -> State Memory.ChunkStorage (Either String a)
+readConnector address = do -- State
+    storage <- get
+    return $ do -- Either
+                words <- Memory.read storage address 6
+                entry <- Serializable.deserialize words
+                return entry
 
 writeEntry :: 
-    Serializer.Interface a => 
-    Int -> a -> State Memory.ChunkStorage ()
-writeEntry address entry = do
+    Serializable.Interface a => 
+    Int -> a -> State Memory.ChunkStorage (Either String ())
+writeEntry address entry = do -- State
     storage <- get
-    let words = Serializer.serialize entry
-    let maybeStorage = Memory.write storage address words
-    case maybeStorage of
-        Nothing -> return ()
-        Just newStorage -> put newStorage
+    let words = Serializable.serialize entry
+    let modifiedStorage = Memory.write storage address words
+    case modifiedStorage of
+        Left errorMessage -> return (Left errorMessage)
+        Right newStorage -> put newStorage >> return (Right ())

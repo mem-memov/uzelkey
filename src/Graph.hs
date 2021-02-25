@@ -4,17 +4,17 @@ module Graph
 ) where
 
 import qualified EntryStorage
-import qualified EntryStorage.Interface.Eraser as Eraser
+import qualified EntryStorage.Interface.Erasable as Erasable
 import qualified Graph.Node as Node
 import qualified Memory
 import Control.Monad.State (State, get)
 
-addNode :: State Memory.ChunkStorage (Maybe Node.Type)
+addNode :: State Memory.ChunkStorage (Either String Node.Type)
 addNode = do
     maybeFirstNode <- getNode 0
-    return Nothing
+    return $ Left "Error adding node."
 
-getNode :: Int -> State Memory.ChunkStorage (Maybe Node.Type)
+getNode :: Int -> State Memory.ChunkStorage (Either String Node.Type)
 getNode identifier = do
-    maybeEntry <- EntryStorage.readEntry identifier
-    return $ fmap Node.construct maybeEntry
+    maybeCounter <- EntryStorage.readCounter identifier
+    return $ fmap Node.construct maybeCounter
