@@ -5,6 +5,7 @@ import qualified EntryStorage.Data.Counter.Link as CounterLink
 import qualified EntryStorage.Data.Connector.Chain as Chain
 import qualified EntryStorage.Interface.Serializable as Serializable
 import qualified EntryStorage.Interface.Erasable as Erasable
+import qualified EntryStorage.Interface.Traversable as Traversable
 
 data Type = 
     Type 
@@ -26,3 +27,10 @@ instance Serializable.Interface Type where
 instance Erasable.Interface Type where
     erase (Type counterLink chain) = Type (Erasable.erase counterLink) (Erasable.erase chain)
     isBlank (Type counterLink chain) = Erasable.isBlank counterLink && Erasable.isBlank chain
+
+instance Traversable.CounterProducibleInterface Type where
+    getCounter (Type counterLink _) = Traversable.getCounter counterLink
+
+instance Traversable.ChainableInterface Type where
+    getPrevious (Type _ chain) = Traversable.getPrevious chain
+    getNext (Type _ chain) = Traversable.getNext chain

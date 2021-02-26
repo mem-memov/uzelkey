@@ -5,6 +5,7 @@ import qualified EntryStorage.Data.Count as Count
 import qualified EntryStorage.Data.Connector.Link as ConnectorLink
 import qualified EntryStorage.Interface.Serializable as Serializable
 import qualified EntryStorage.Interface.Erasable as Erasable
+import qualified EntryStorage.Interface.Traversable as Traversable
 
 data Type =
     Type
@@ -27,3 +28,9 @@ instance Serializable.Interface Type where
 instance Erasable.Interface Type where
     erase (Type count connectorLink) = Type (Erasable.erase count) (Erasable.erase connectorLink)
     isBlank (Type count connectorLink) = Erasable.isBlank count && Erasable.isBlank connectorLink
+
+instance Traversable.AccumulatableInterface Type where
+    countConnectors (Type count _) = count
+
+instance Traversable.ConnectorProducibleInterface Type where
+    getConnector (Type _ connectorLink) = Traversable.getConnector connectorLink

@@ -4,6 +4,7 @@ module EntryStorage.Data.Counter.Accumulator.Positive
 import qualified EntryStorage.Data.Counter.Accumulator as Accumulator
 import qualified EntryStorage.Interface.Serializable as Serializable
 import qualified EntryStorage.Interface.Erasable as Erasable
+import qualified EntryStorage.Interface.Traversable as Traversable
 
 newtype Type = Type Accumulator.Type deriving (Eq)
 

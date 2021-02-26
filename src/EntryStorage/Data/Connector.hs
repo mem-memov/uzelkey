@@ -29,10 +29,10 @@ instance Erasable.Interface Type where
     isBlank (Type positivePointer negativePointer) = Erasable.isBlank positivePointer && Erasable.isBlank negativePointer
 
 instance Traversable.ConnectableInterface Type where
-    getPositiveCounter = undefined
-    getPreviousPositiveConnector = undefined
-    getNextPositiveConnector = undefined
-    getNegativeCounter = undefined
-    getPreviousNegativeConnector = undefined
-    getNextNegativeConnector = undefined
+    getPositiveCounter (Type positivePointer _) = Traversable.getCounter positivePointer
+    getPreviousPositiveConnector (Type positivePointer _) = Traversable.getPrevious positivePointer
+    getNextPositiveConnector (Type positivePointer _) = Traversable.getNext positivePointer
+    getNegativeCounter (Type _ negativePointer) = Traversable.getCounter negativePointer
+    getPreviousNegativeConnector (Type _ negativePointer) = Traversable.getPrevious negativePointer
+    getNextNegativeConnector (Type _ negativePointer) = Traversable.getNext negativePointer
 

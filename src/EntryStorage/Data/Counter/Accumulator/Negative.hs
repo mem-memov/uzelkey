@@ -4,6 +4,7 @@ module EntryStorage.Data.Counter.Accumulator.Negative
 import qualified EntryStorage.Data.Counter.Accumulator as Accumulator
 import qualified EntryStorage.Interface.Serializable as Serializable
 import qualified EntryStorage.Interface.Erasable as Erasable
+import qualified EntryStorage.Interface.Traversable as Traversable
 
 newtype Type = Type Accumulator.Type deriving (Eq)
 
@@ -17,3 +18,9 @@ instance Serializable.Interface Type where
 instance Erasable.Interface Type where
     erase (Type accumulator) = Type $ Erasable.erase accumulator
     isBlank (Type accumulator) = Erasable.isBlank accumulator
+
+instance Traversable.AccumulatableInterface Type where
+    countConnectors (Type accumulator) = Traversable.countConnectors accumulator
+
+instance Traversable.ConnectorProducibleInterface Type where
+    getConnector (Type accumulator) = Traversable.getConnector accumulator

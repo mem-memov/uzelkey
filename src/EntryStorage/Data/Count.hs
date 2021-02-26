@@ -17,3 +17,5 @@ instance Serializable.Interface Type where
 instance Erasable.Interface Type where
     erase _ = Type 0
     isBlank (Type word) = word == 0
+
+

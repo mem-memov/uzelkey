@@ -32,10 +32,10 @@ instance Erasable.Interface Type where
     isBlank (Type chain positiveAccumulator negativeAccumulator) = Erasable.isBlank chain && Erasable.isBlank positiveAccumulator && Erasable.isBlank negativeAccumulator
 
 instance Traversable.CountableInterface Type where
-    getPreviousCounter = undefined
-    getNextCounter = undefined
-    countPositiveConnectors = undefined
-    getPositiveConnector = undefined
-    countNegativeConnectors = undefined
-    getNegativeConnector = undefined
+    getPreviousCounter (Type chain _ _) = Traversable.getPreviousCounter chain
+    getNextCounter (Type chain _ _) = Traversable.getNextCounter chain
+    countPositiveConnectors (Type _ positiveAccumulator _) = Traversable.countConnectors positiveAccumulator
+    getPositiveConnector (Type _ positiveAccumulator _) = Traversable.getConnector positiveAccumulator
+    countNegativeConnectors (Type _ _ negativeAccumulator) = Traversable.countConnectors negativeAccumulator
+    getNegativeConnector (Type _ _ negativeAccumulator) = Traversable.getConnector negativeAccumulator
 

@@ -12,7 +12,16 @@ module EntryStorage.Interface.Traversable
 , countPositiveConnectors
 , getPositiveConnector
 , countNegativeConnectors
-, getNegativeConnector) where
+, getNegativeConnector
+, ChainableInterface
+, getPrevious
+, getNext
+, CounterProducibleInterface
+, getCounter
+, AccumulatableInterface
+, countConnectors
+, ConnectorProducibleInterface
+, getConnector ) where
 
 import qualified EntryStorage.Data.Count as Count
 import qualified Memory
@@ -33,3 +42,16 @@ class CountableInterface a where
     getPositiveConnector :: ConnectableInterface b => a -> State Memory.ChunkStorage (Either String b)
     countNegativeConnectors :: a -> State Memory.ChunkStorage (Either String Count.Type)
     getNegativeConnector :: ConnectableInterface b => a -> State Memory.ChunkStorage (Either String b)
+
+class ChainableInterface a where
+    getPrevious :: a -> State Memory.ChunkStorage (Either String a) 
+    getNext :: a -> State Memory.ChunkStorage (Either String a) 
+
+class CounterProducibleInterface a where
+    getCounter :: CountableInterface b => a -> State Memory.ChunkStorage (Either String b)
+
+class AccumulatableInterface a where
+    countConnectors :: a -> State Memory.ChunkStorage (Either String Count.Type)
+
+class ConnectorProducibleInterface a where
+    getConnector :: ConnectableInterface b => a -> State Memory.ChunkStorage (Either String b)

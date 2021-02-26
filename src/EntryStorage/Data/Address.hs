@@ -1,8 +1,10 @@
 module EntryStorage.Data.Address
 ( Type ) where
 
+import qualified EntryStorage
 import qualified EntryStorage.Interface.Serializable as Serializable
 import qualified EntryStorage.Interface.Erasable as Erasable
+import qualified EntryStorage.Interface.Traversable as Traversable
 
 newtype Type = Type Word deriving (Eq)
 
@@ -17,3 +19,9 @@ instance Serializable.Interface Type where
 instance Erasable.Interface Type where
     erase _ = Type 0
     isBlank (Type word) = word == 0
+
+instance Traversable.CounterProducibleInterface Type where
+    getCounter (Type word) = EntryStorage.readCounter (fromEnum word)
+
+instance Traversable.ConnectorProducibleInterface Type where
+    getConnector (Type word) = EntryStorage.readCounter (fromEnum word)
