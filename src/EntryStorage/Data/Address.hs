@@ -24,4 +24,4 @@ instance Traversable.CounterProducibleInterface Type where
     getCounter (Type word) = EntryStorage.readCounter (fromEnum word)
 
 instance Traversable.ConnectorProducibleInterface Type where
-    getConnector (Type word) = EntryStorage.readCounter (fromEnum word)
+    getConnector (Type word) = EntryStorage.readConnector (fromEnum word)

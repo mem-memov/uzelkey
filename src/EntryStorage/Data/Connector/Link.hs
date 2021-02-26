@@ -20,4 +20,4 @@ instance Erasable.Interface Type where
     isBlank (Type address) = Erasable.isBlank address
 
 instance Traversable.ConnectorProducibleInterface Type where
-    getConnector (Type address) = EntryStorage.getConnector address
+    getConnector (Type address) = Traversable.getConnector address

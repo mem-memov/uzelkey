@@ -20,4 +20,4 @@ instance Erasable.Interface Type where
     isBlank (Type link) = Erasable.isBlank link
 
 instance Traversable.CounterProducibleInterface Type where
-    getCounter (Type link) = EntryStorage.getCounter link
+    getCounter (Type link) = Traversable.getCounter link
