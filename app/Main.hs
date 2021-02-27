@@ -2,9 +2,7 @@ module Main where
 
 import qualified Memory
 import Data.Maybe (fromJust)
-import qualified EntryStorage.Data.Counter as Counter
 import qualified EntryStorage
-import qualified EntryStorage.Interface.Serializable  as Serializable
 import Control.Monad.State (evalState)
 
 main :: IO ()
